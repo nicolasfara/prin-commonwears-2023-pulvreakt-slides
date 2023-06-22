@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "custom-theme.css",
-	"sourceRoot": "/home/runner/work/prin-common-wears-2023-pulvreakt-slides/prin-common-wears-2023-pulvreakt-slides",
+	"sourceRoot": "/home/runner/work/prin-commonwears-2023-pulvreakt-slides/prin-commonwears-2023-pulvreakt-slides",
 	"sources": [
 		"assets/custom-theme.scss",
 		"themes/reveal-hugo/assets/reveal-js/dist/theme/template/mixins.scss",
