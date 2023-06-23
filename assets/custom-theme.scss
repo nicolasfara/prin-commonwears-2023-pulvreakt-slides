@@ -230,3 +230,20 @@ section.has-light-background {
     background: none !important;
     box-shadow: none !important;
 }
+
+.ref-entry {
+	display: flex;
+
+	i {
+		font-size: 1.5em;
+		object-fit: contain;
+		align-self: center;
+		padding: 0em 1em;
+	}
+
+	p {
+		text-align: left;
+		flex: 1 1 auto;
+		align-self: center;
+	}
+}

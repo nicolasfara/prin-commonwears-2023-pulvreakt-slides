@@ -396,3 +396,21 @@ The demo is only a proof of concept.
 
 # References
 
+{{% refentry fa-class="fa-brands fa-github" %}}
+
+[`pulvreakt/pulvreakt`](https://github.com/pulvreakt/pulvreakt)
+
+{{% /refentry %}}
+
+{{% refentry fa-class="fa-brands fa-github" %}}
+
+[`nicolasfara/prin-commonwears-2023-pulvreakt`](https://github.com/nicolasfara/prin-commonwears-2023-pulvreakt)
+
+{{% /refentry %}}
+
+{{% refentry fa-class="fa-solid fa-book" %}}
+
+[`pulvreakt.github.io/pulvreakt`](https://pulvreakt.github.io/pulvreakt/)  --- 🚧
+
+{{% /refentry %}}
+
