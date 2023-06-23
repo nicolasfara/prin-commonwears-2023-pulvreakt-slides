@@ -373,6 +373,16 @@ suspend fun main() {
 
 # Demo
 
+{{% fragment %}}
+⚠️ DISCLAIMER ⚠️
+
+To find the object is used the RSSI value of the Bluetooth signal.  
+The RSSI value is not a reliable metric to measure the distance between two devices,  
+fluctuations in the signal strength can occur due to the environment.
+
+The demo is only a proof of concept.
+{{% /fragment %}}
+
 ---
 
 # PulvReAKt Roadmap
