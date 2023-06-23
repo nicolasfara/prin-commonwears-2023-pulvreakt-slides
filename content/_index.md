@@ -1,6 +1,6 @@
 +++
-title = "Guide for writing markdown slides"
-description = "A Hugo theme for creating Reveal.js presentations"
+title = "PulvReAKt @ Commonwears"
+description = "A gentle introduction to PulvReAKt: a pulverization framework in Kotlin"
 outputs = ["Reveal"]
 aliases = [
     "/guide/"
@@ -15,63 +15,3 @@ aliases = [
 <p class="avatar-container">
   <img class="avatar" src="https://avatars.githubusercontent.com/u/11615611?v=4" alt="nicolas-avatar">
 </p>
-
----
-
-# Overview
-
----
-
-# Pulverization approach
-
----
-
-{{% section %}}
-
-# PulvReAKt
-
----
-
-## Architecture
-
----
-
-## DSL
-
-{{% /section %}}
-
----
-
-{{% section %}}
-
-# PulvReAKt in action
-
----
-
-## Hot-warm-cold Game
-
----
-
-## System definition
-
----
-
-## Components implementation
-
----
-
-## Runtime definition
-
----
-
-## Deployment
-
-{{% /section %}}
-
----
-
-# Demo
-
----
-
-# PulvReAKt Roadmap

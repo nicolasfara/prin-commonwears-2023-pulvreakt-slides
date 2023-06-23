@@ -27,10 +27,10 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
 // @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono');
 
-// $backgroundColor: #fff;
+$backgroundColor: #fff;
 
-// $mainColor: #000;
-// $headingColor: #111;
+$mainColor: #292929;
+$headingColor: #383838;
 
 $mainFontSize: 2em;
 // $mainFont: 'Roboto', sans-serif;
@@ -61,6 +61,10 @@ section.has-light-background {
 	&, h1, h2, h3, h4, h5, h6 {
 		color: #222;
 	}
+}
+
+.reveal h1, h2, h3, h4, h5, h6 {
+	text-transform: none !important;
 }
 
 .reveal pre {
@@ -186,8 +190,33 @@ section.has-light-background {
 	border-style: none;
 }
 
+.multiCol {
+	display: flex;
+}
+
+.col {
+	flex: 1;
+	padding: 0.9em;
+	text-align: left;
+	align-self: center;
+
+	figure {
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+		/* align horizontal */
+		align-items: center;
+		/* align vertical */
+	}
+
+	figcaption p {
+		font-size: 0.5em;
+	}
+}
+
 .avatar-container {
-    //padding-top: 0.2em;
+    padding-top: 0.2em;
 }
 
 .avatar {
