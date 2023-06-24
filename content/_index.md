@@ -15,3 +15,4 @@ aliases = [
 <p class="avatar-container">
   <img class="avatar" src="https://avatars.githubusercontent.com/u/11615611?v=4" alt="nicolas-avatar">
 </p>
+Nicolas Farabegoli

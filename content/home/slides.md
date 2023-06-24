@@ -61,7 +61,7 @@ Main features:
 {{% /col %}}
 
 {{% col %}}
-LOGO
+{{< figure src="figures/pulvreakt-logo.jpg" width="50%" >}}
 {{% /col %}}
 {{% /multicol %}}
 
@@ -214,6 +214,10 @@ In this configuration the `Behaviour` and `Communication` components can be depl
 
 ## Behaviour implementation
 
+The `Behaviour` component represents the logic of the device.
+
+It can be seen as a function with a dependency to the other four components.
+
 ```kotlin
 class WearableBehaviour : Behaviour<Unit, DistanceFromSource, SignalStrengthValue, WearableDisplayInfo, Unit> {
     override val context: Context by inject()
@@ -238,13 +242,17 @@ class WearableBehaviour : Behaviour<Unit, DistanceFromSource, SignalStrengthValu
 
 ## Communication implementation
 
+The `Communication` component is used to communicate with other instances of logical devices in the system.
+
+`send()` and `receive()` are the only methods to be implemented for this component.
+
 ```kotlin
 @Serializable
 data class DistanceFromSource(val deviceId: String, val distance: Double)
 
 class WearableComm : Communication<DistanceFromSource> {
     override val context: Context by inject()
-    private val mqttClient = MqttClient("tcp://192.168.8.1:1883", MqttClient.generateClientId(), MemoryPersistence())
+    private val mqttClient = MqttClient(...)
     private val commTopic = "communication"
     private val defaultQoS = 2
 
@@ -259,9 +267,15 @@ class WearableComm : Communication<DistanceFromSource> {
 }
 ```
 
+The implementation of this component is "application-dependent" based on the communication strategy to adopt.
+
 ---
 
 ## Sensors implementation
+
+The definition of sensors requires two concepts: `Sensor` and `SensorsContainer`.
+
+The former represents the the actual sensor; the latter aggregate all the sensors belonging to the device.
 
 ```kotlin
 @Serializable
@@ -291,6 +305,8 @@ class WearableSensorsContainer(private val aContext: AndroidContext) : SensorsCo
 
 ## Actuators implementation
 
+Similarly, for the actuators we have `Actuator` and `ActuatorsContainer`.
+
 ```kotlin
 class WearableActuator(private val display: DisplayViewModel) : Actuator<WearableDisplayInfo> {
     override suspend fun actuate(payload: WearableDisplayInfo) {
@@ -311,6 +327,12 @@ class WearableActuatorsContainer(private val display: DisplayViewModel) : Actuat
 ---
 
 ## Runtime definition
+
+We define a `ReconfigurationEvent` to reconfigure the system when the battery falls below 20%.
+
+Then, we register all the implemented components and their startup hosts
+
+Finally, we specify the new configuration associated to the reconfiguration event.
 
 ```kotlin
 class LowBatteryEvent() : ReconfigurationEvent<Double>(), Initializable {
