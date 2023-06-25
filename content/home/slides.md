@@ -103,16 +103,16 @@ object Smartphone : Host {
     override val capabilities = setOf(EmbeddedDevice)
 }
 
-object Laptop : Host {
+object Server : Host {
     override val hostname = "alice"
     override val capabilities = setOf(HighCpu)
 }
 
-val infrastructure = setOf(Smartphone, Laptop)
+val infrastructure = setOf(Smartphone, Server)
 
 val runtimeConfig = pulverizationRuntime(systemConfig, "wearable", infrastructure) {
-    WearableBehaviour() startsOn Smartphone
-    WearableComm() startsOn Smartphone
+    WearableBehaviour() startsOn Server
+    WearableComm() startsOn Server
     WearableSensors() startsOn Smartphone
     WearableActuators() startsOn Smartphone
 }
