@@ -79,6 +79,7 @@ JVM, Android, JS, iOS, Linux, macOS, and Windows.
 ## PulvReAKt DSLs
 
 #### System DSL
+
 ```kotlin
 object EmbeddedDevice : Capability
 object HighCpu : Capability
@@ -95,6 +96,7 @@ val systemConfig = pulverizationSystem {
 ```
 
 #### Deployment DSL
+
 ```kotlin
 object Smartphone : Host {
     override val hostname = "android"
@@ -380,6 +382,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 #### Laptop deployment unit
+
 ```kotlin
 suspend fun main() {
     // Other initializations
@@ -395,28 +398,38 @@ suspend fun main() {
 
 # Demo
 
+<i class="fa-solid fa-download"></i> --- Download the demo Android app [http://bitly.ws/JwBD](http://bitly.ws/JwBD)  
+
+<i class="fa-solid fa-wifi"></i> --- Connect to _Find-Me_ (password: `findmepulvreakt`)  
+
+<i class="fa-solid fa-magnifying-glass"></i> --- Let's start to find the object in the room using the app!
+
 {{% fragment %}}
 ⚠️ DISCLAIMER ⚠️
 
-To find the object is used the RSSI value of the Bluetooth signal.  
-The RSSI value is not a reliable metric to measure the distance between two devices,  
-fluctuations in the signal strength can occur due to the environment.
+To find the object is used the RSSI value of the Bluetooth signal and the distance could be inaccurate.
 
-The demo is only a proof of concept.
 {{% /fragment %}}
 
 ---
 
-# PulvReAKt Roadmap
+# PulvReAKt Roadmap to 1.x
 
-1. Stabilize the framework's API
-2. Support _global_ reconfiguration rules
-3. Support _openness_ (new host added at runtime)
-4. Other newtwork protocols (ZeroMQ, socket, ...)
+Stabilize the framework's API  
+Support _global_ reconfiguration rules  
+Support _openness_ (new host added at runtime)  
+Other newtwork protocols (ZeroMQ, socket, ...)  
+Improve error handling and _failure recovery_
 
 ---
 
 # References
+
+{{% refentry fa-class="fa-solid fa-tv" %}}
+
+[`nicolasfarabegoli.it/prin-commonwears-2023-pulvreakt-slides`](https://nicolasfarabegoli.it/prin-commonwears-2023-pulvreakt-slides)
+
+{{% /refentry %}}
 
 {{% refentry fa-class="fa-brands fa-github" %}}
 
@@ -435,4 +448,3 @@ The demo is only a proof of concept.
 [`pulvreakt.github.io/pulvreakt`](https://pulvreakt.github.io/pulvreakt/)  --- 🚧
 
 {{% /refentry %}}
-
