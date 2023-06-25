@@ -138,7 +138,7 @@ JVM, Android, JS, iOS, Linux, macOS, and Windows.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">reconfigurationRules</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#000">onDevice</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">OnLowBattery</span> <span style="color:#000">reconfigures</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">Behaviour</span> <span style="color:#000">movesTo</span> <span style="color:#000">Laptop</span> <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000">OnLowBattery</span> <span style="color:#000">reconfigures</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">Behaviour</span> <span style="color:#000">movesTo</span> <span style="color:#000">Server</span> <span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
@@ -270,6 +270,18 @@ On the smartphone UI, the user can see the <strong>distance</strong> from the ob
 </span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div></section><section>
+<h2 id="infrastructure-definition">Infrastructure definition</h2>
+<p>We define the available hosts in the system, by providing the system’s capability.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">Smartphone</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Host</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">hostname</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"android"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">capabilities</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">HighCpu</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">Laptop</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Host</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">hostname</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"laptop"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">capabilities</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">EmbeddedDevice</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div></section><section>
 <h2 id="runtime-definition">Runtime definition</h2>
 <p>We define a <code>ReconfigurationEvent</code> to reconfigure the system when the battery falls below 20%.</p>
 <p>Then, we register all the implemented components and their startup hosts</p>
@@ -320,7 +332,7 @@ On the smartphone UI, the user can see the <strong>distance</strong> from the ob
 </section>
 </section><section>
 <h1 id="demo">Demo</h1>
-<p><i class="fa-solid fa-download"></i> — Download the demo Android app <a href="http://bitly.ws/JwBD">http://bitly.ws/JwBD</a></p>
+<p><i class="fa-solid fa-download"></i> — Download the demo Android app <a href="http://bitly.ws/JxV7">http://bitly.ws/JxV7</a></p>
 <p><i class="fa-solid fa-wifi"></i> — Connect to <em>Find-Me</em> (password: <code>findmepulvreakt</code>)</p>
 <p><i class="fa-solid fa-magnifying-glass"></i> — Let’s start to find the object in the room using the app!</p>
 
