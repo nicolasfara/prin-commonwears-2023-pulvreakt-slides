@@ -138,7 +138,7 @@ val runtimeConfig = pulverizationRuntime(systemConfig, "wearable", infrastructur
 
     reconfigurationRules {
         onDevice {
-            OnLowBattery reconfigures { Behaviour movesTo Laptop }
+            OnLowBattery reconfigures { Behaviour movesTo Server }
         }
     }
 }
@@ -328,6 +328,24 @@ class WearableActuatorsContainer(private val display: DisplayViewModel) : Actuat
 
 ---
 
+## Infrastructure definition
+
+We define the available hosts in the system, by providing the system's capability.
+
+```kotlin
+object Smartphone : Host {
+    override val hostname = "android"
+    override val capabilities = setOf(HighCpu)
+}
+
+object Laptop : Host {
+    override val hostname = "laptop"
+    override val capabilities = setOf(EmbeddedDevice)
+}
+```
+
+---
+
 ## Runtime definition
 
 We define a `ReconfigurationEvent` to reconfigure the system when the battery falls below 20%.
@@ -398,7 +416,7 @@ suspend fun main() {
 
 # Demo
 
-<i class="fa-solid fa-download"></i> --- Download the demo Android app [http://bitly.ws/JwBD](http://bitly.ws/JwBD)  
+<i class="fa-solid fa-download"></i> --- Download the demo Android app [http://bitly.ws/JxV7](http://bitly.ws/JxV7)  
 
 <i class="fa-solid fa-wifi"></i> --- Connect to _Find-Me_ (password: `findmepulvreakt`)  
 
