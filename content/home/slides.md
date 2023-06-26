@@ -337,12 +337,12 @@ We define the available hosts in the system, by providing the system's capabilit
 ```kotlin
 object Smartphone : Host {
     override val hostname = "android"
-    override val capabilities = setOf(HighCpu)
+    override val capabilities = setOf(EmbeddedDevice)
 }
 
 object Laptop : Host {
     override val hostname = "laptop"
-    override val capabilities = setOf(EmbeddedDevice)
+    override val capabilities = setOf(HighCpu)
 }
 ```
 
