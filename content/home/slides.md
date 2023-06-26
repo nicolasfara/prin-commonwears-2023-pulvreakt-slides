@@ -418,18 +418,18 @@ suspend fun main() {
 
 # Demo
 
-<i class="fa-solid fa-download"></i> --- Download the demo Android app [http://bitly.ws/JxV7](http://bitly.ws/JxV7)  
+<!-- <i class="fa-solid fa-download"></i> --- Download the demo Android app [http://bitly.ws/JxV7](http://bitly.ws/JxV7)  
 
 <i class="fa-solid fa-wifi"></i> --- Connect to _Find-Me_ (password: `findmepulvreakt`)  
 
-<i class="fa-solid fa-magnifying-glass"></i> --- Let's start to find the object in the room using the app!
+<i class="fa-solid fa-magnifying-glass"></i> --- Let's start to find the object in the room using the app! -->
 
-{{% fragment %}}
+<!-- {{% fragment %}}
 ⚠️ DISCLAIMER ⚠️
 
 To find the object is used the RSSI value of the Bluetooth signal and the distance could be inaccurate.
 
-{{% /fragment %}}
+{{% /fragment %}} -->
 
 ---
 
