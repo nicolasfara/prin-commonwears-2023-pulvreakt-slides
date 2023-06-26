@@ -10,7 +10,7 @@ aliases = [
 
 # ~ PulvReAKt ~
 
-## Pulverization with Reactive Adaptation in Kotlin
+## Pulverization with Reconfigurable Adaptation in Kotlin
 
 <p class="avatar-container">
   <img class="avatar" src="https://avatars.githubusercontent.com/u/11615611?v=4" alt="nicolas-avatar">
