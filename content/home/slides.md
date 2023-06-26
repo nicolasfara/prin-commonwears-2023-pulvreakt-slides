@@ -74,7 +74,7 @@ JVM, Android, JS, iOS, Linux, macOS, and Windows.
 
 {{< figure src="figures/pulverization-framework-overview.svg" >}}
 
----
+<!-- ---
 
 ## PulvReAKt DSLs
 
@@ -143,6 +143,8 @@ val runtimeConfig = pulverizationRuntime(systemConfig, "wearable", infrastructur
     }
 }
 ```
+
+--- -->
 
 ---
 
