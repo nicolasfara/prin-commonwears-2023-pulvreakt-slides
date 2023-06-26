@@ -87,62 +87,78 @@ JVM, Android, JS, iOS, Linux, macOS, and Windows.</p>
 <h2 id="architecture">Architecture</h2>
 <figure><img src="figures/pulverization-framework-overview.svg">
 </figure>
+<!-- ---
+
+## PulvReAKt DSLs
+
+#### System DSL
+
+```kotlin
+object EmbeddedDevice : Capability
+object HighCpu : Capability
+
+val systemConfig = pulverizationSystem {
+    device("wearable") {
+        Behaviour and Communication deployableOn setOf(EmbeddedDevice, HighCpu)
+        Sensors and Actuators deployableOn setOf(EmbeddedDevice)
+    }
+    device("other-device") {
+        Behaviour and Communication deployableOn HighCpu
+    }
+}
+```
+
+#### Deployment DSL
+
+```kotlin
+object Smartphone : Host {
+    override val hostname = "android"
+    override val capabilities = setOf(EmbeddedDevice)
+}
+
+object Server : Host {
+    override val hostname = "alice"
+    override val capabilities = setOf(HighCpu)
+}
+
+val infrastructure = setOf(Smartphone, Server)
+
+val runtimeConfig = pulverizationRuntime(systemConfig, "wearable", infrastructure) {
+    WearableBehaviour() startsOn Server
+    WearableComm() startsOn Server
+    WearableSensors() startsOn Smartphone
+    WearableActuators() startsOn Smartphone
+}
+```
+
+---
+
+## Reconfiguration
+
+```kotlin
+expect fun getBatteryStatus(): Flow<Double>
+
+object OnLowBattery : ReconfigurationEvent<Double> {
+    override val events = getBatteryStatus()
+    override val predicate = { it < 20.0 }
+}
+
+val runtimeConfig = pulverizationRuntime(systemConfig, "wearable", infrastructure) {
+    WearableBehaviour() startsOn Smartphone
+    WearableComm() startsOn Smartphone
+    WearableSensors() startsOn Smartphone
+    WearableActuators() startsOn Smartphone
+
+    reconfigurationRules {
+        onDevice {
+            OnLowBattery reconfigures { Behaviour movesTo Server }
+        }
+    }
+}
+```
+
+--- -->
 </section><section>
-<h2 id="pulvreakt-dsls">PulvReAKt DSLs</h2>
-<h4 id="system-dsl">System DSL</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">EmbeddedDevice</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Capability</span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">HighCpu</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Capability</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">systemConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">pulverizationSystem</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">device</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"wearable"</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">Behaviour</span> <span style="color:#000">and</span> <span style="color:#000">Communication</span> <span style="color:#000">deployableOn</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">EmbeddedDevice</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">HighCpu</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">Sensors</span> <span style="color:#000">and</span> <span style="color:#000">Actuators</span> <span style="color:#000">deployableOn</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">EmbeddedDevice</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">device</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">"other-device"</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">Behaviour</span> <span style="color:#000">and</span> <span style="color:#000">Communication</span> <span style="color:#000">deployableOn</span> <span style="color:#000">HighCpu</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><h4 id="deployment-dsl">Deployment DSL</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">Smartphone</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Host</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">hostname</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"android"</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">capabilities</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">EmbeddedDevice</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">Server</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Host</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">hostname</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#4e9a06">"alice"</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">capabilities</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">HighCpu</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">infrastructure</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">setOf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Smartphone</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Server</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">runtimeConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">pulverizationRuntime</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">systemConfig</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"wearable"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">infrastructure</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableBehaviour</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Server</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableComm</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Server</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableSensors</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Smartphone</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableActuators</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Smartphone</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div></section><section>
-<h2 id="reconfiguration">Reconfiguration</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">expect</span> <span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">getBatteryStatus</span><span style="color:#000;font-weight:bold">():</span> <span style="color:#000">Flow</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">Double</span><span style="color:#000;font-weight:bold">&gt;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">object</span> <span style="color:#000">OnLowBattery</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000">ReconfigurationEvent</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">Double</span><span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">events</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">getBatteryStatus</span><span style="color:#000;font-weight:bold">()</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">predicate</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">it</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">20.0</span> <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">runtimeConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">pulverizationRuntime</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">systemConfig</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"wearable"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">infrastructure</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableBehaviour</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Smartphone</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableComm</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Smartphone</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableSensors</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Smartphone</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">WearableActuators</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000">startsOn</span> <span style="color:#000">Smartphone</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000">reconfigurationRules</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000">onDevice</span> <span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#000">OnLowBattery</span> <span style="color:#000">reconfigures</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">Behaviour</span> <span style="color:#000">movesTo</span> <span style="color:#000">Server</span> <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div></section><section>
 <h2 id="components-communication">Components communication</h2>
 <figure><img src="figures/componentref-communicator.svg">
 </figure>
