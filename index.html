@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head>
-	<meta name="generator" content="Hugo 0.152.2">
+	<meta name="generator" content="Hugo 0.153.0">
     <meta charset="utf-8">
 <title>PulvReAKt @ Commonwears</title>
 <meta name="description" content="A gentle introduction to PulvReAKt: a pulverization framework in Kotlin">
@@ -256,8 +256,8 @@ On the smartphone UI, the user can see the <strong>distance</strong> from the ob
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">suspend</span> <span style="color:#000">initialize</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// Setup Android BT
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#8f5902;font-style:italic">// Update the variable `rssi` via callback 
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span></span><span style="display:flex;"><span>        <span style="color:#8f5902;font-style:italic">// Update the variable `rssi` via callback 
+</span></span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">override</span> <span style="color:#204a87;font-weight:bold">suspend</span> <span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">sense</span><span style="color:#000;font-weight:bold">():</span> <span style="color:#000">SignalStrengthValue</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">SignalStrengthValue</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">rssi</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
@@ -334,14 +334,14 @@ On the smartphone UI, the user can see the <strong>distance</strong> from the ob
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">super</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">onCreate</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">savedInstanceState</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// Other initializations
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">platform</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">PulverizationRuntime</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">deviceId</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"android"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">runtimeConfig</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">platform</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">start</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div><h4 id="laptop-deployment-unit">Laptop deployment unit</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">suspend</span> <span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#8f5902;font-style:italic">// Other initializations
-</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">platform</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">PulverizationRuntime</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">deviceId</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">"laptop"</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">runtimeConfig</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">platform</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">start</span><span style="color:#000;font-weight:bold">()</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
